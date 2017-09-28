@@ -8,6 +8,7 @@ Download LogoControl and manual: http://www.frickelzeugs.de/
 	
 Control Domoticz devices thrue LogoControl I use shell script within LogoControl.
 ./home/pi/LogoControl/Scripts/yourscriptfile.sh
+
 Switch Device 123 on or off:
 
 	#!/bin/bash
