@@ -22,23 +22,22 @@ return {
 	},
 	
 	execute = function(domoticz)
-  
-    local logoControlIP = "127.0.0.1"	-- LogoControl Ipadress
-    local logoControlport = "8088"		-- LogoControl Port
+		local logoControlIP = "127.0.0.1"	-- LogoControl Ipadress
+    		local logoControlport = "8088"		-- LogoControl Port
 		local tempDevice = domoticz.devices('Temp Logo')
 		local logoControlDeviceNr = 4
-    local logoControlDeviceAttrNr = "5"
+    		local logoControlDeviceAttrNr = "5"
     
-    json = (loadfile "/home/pi/domoticz/scripts/lua/JSON.lua")()
+    		json = (loadfile "/home/pi/domoticz/scripts/lua/JSON.lua")()
 		local file=assert(io.popen('curl http://' .. logoControlIP ..':' .. logoControlport .. '/rest/attributes'))
 		local raw = file:read('*all')
 		file:close()
-    local logoControlAttributes = json:decode(raw)
+    		local logoControlAttributes = json:decode(raw)
 		local logoOutputDevice = logoControlAttributes.attributeUpdates[logoControlDeviceAttrNr].D
 		local logoOutput = logoControlAttributes.attributeUpdates[logoControlDeviceAttrNr].V
 				
 		domoticz.log('Checking status -- Device ' .. logoOutputDevice .. ' value is ' .. logoOutput, domoticz.LOG_INFO)
-    tempDevice.updateTemperature(logoOutput)
+    		tempDevice.updateTemperature(logoOutput)
         
-    end
+    	end
 }
