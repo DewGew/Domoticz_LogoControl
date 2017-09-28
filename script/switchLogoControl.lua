@@ -33,8 +33,6 @@
 	</trigger>	
 </device>
 		
-		
-	Titel: logoControl.lua	
 	Framework: dzVents 2.2.0
 	Datum: 2017-09-18
 ]]
