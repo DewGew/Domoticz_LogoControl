@@ -1,15 +1,16 @@
 # Domoticz_LogoControl
 Lua script to control Siemens Logo oba7/oba8
--- LogoControl script v1.0.1 --
-	        by DewGew
+
+-- LogoControl script v1.0.1 by DewGew --
+
+A dzVents script to control and monitor Siemens Logo PLC 0Ba7 or OBa8 using 
+LogoControl by frickelzeugs as a bridge between domoticz and PLC.
+Download LogoControl and manual: http://www.frickelzeugs.de/
 	
-	A dzVents script to control and monitor Siemens Logo PLC 0Ba7 or OBa8 using 
-	LogoControl by frickelzeugs as a bridge between domoticz and PLC.
-	Download LogoControl and manual: http://www.frickelzeugs.de/
-	
-	Control Domoticz devices thrue LogoControl I use shell script within LogoControl.
-	./home/pi/LogoControl/Scripts/yourscriptfile.sh
-	Switch Device 123 on or off:
+Control Domoticz devices thrue LogoControl I use shell script within LogoControl.
+./home/pi/LogoControl/Scripts/yourscriptfile.sh
+Switch Device 123 on or off:
+
 	#!/bin/bash
 	ip=127.0.0.1 #Domoticz ipadress
 	port=8080	#Domoticz port
@@ -18,7 +19,7 @@ Lua script to control Siemens Logo oba7/oba8
 	or
 	curl "http://$ip:$port/json.htm?type=command&param=switchlight&idx=$switchidx&switchcmd=Off"
 	 
-	then add 'trigger' in your LogoControl config file, example on PLC output Q1 (device 1 in LogoControl):
+then add 'trigger' in your LogoControl config file, example on PLC output Q1 (device 1 in LogoControl):
 	
 	<device id="1" name="Bedroom Light" type="light">
 		<attribute id="1" name="Status" plc="myLogo" address="Q1" valueTextConverter="on_off" />
