@@ -8,7 +8,6 @@
 	
 	This script is updating a virtual temp device e.g domoticz.devices('Temp Logo')
 	
-	Titel: logoControlTemp.lua	
 	Framework: dzVents 2.2.0
 	Datum: 2017-09-18
 ]]
