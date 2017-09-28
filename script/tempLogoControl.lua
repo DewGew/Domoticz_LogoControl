@@ -26,7 +26,7 @@ return {
     		local logoControlport = "8088"		-- LogoControl Port
 		local tempDevice = domoticz.devices('Temp Logo')
 		local logoControlDeviceNr = 4
-    		local logoControlDeviceAttrNr = "5"
+    		local logoControlDeviceAttrNr = 5
     
     		json = (loadfile "/home/pi/domoticz/scripts/lua/JSON.lua")()
 		local file=assert(io.popen('curl http://' .. logoControlIP ..':' .. logoControlport .. '/rest/attributes'))
