@@ -44,7 +44,7 @@ return {
 	    devices = {
 	        'Q1',	-- Add domoticz devices that will trigger the script
 	        'Q2',
-		--	'Q3'	-- etc
+		--'Q3'	-- etc
 	   }
 	},
 	logging = {
