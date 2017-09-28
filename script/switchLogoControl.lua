@@ -53,37 +53,36 @@ return {
 	},
 
 	execute = function(domoticz, device)
-  
-    local logoControlIP = "127.0.0.1"	-- LogoControl Ipadress
-    local logoControlport = "8088"		-- LogoControl Port
-    local logoControlDeviceNr = ""
-    local logoControlDeviceAttrNr = ""
+		local logoControlIP = "127.0.0.1"	-- LogoControl Ipadress
+		local logoControlport = "8088"		-- LogoControl Port
+		local logoControlDeviceNr = ""
+		local logoControlDeviceAttrNr = ""
 	 
-	    if device.name == "Q1" then logoControlDeviceNr = 1 end		-- pair domoticz device with LogoControl device
-	    if device.name == "Q1" then logoControlDeviceAttrNr = 1 end	-- pair domoticz device with LogoControl device Attribute eg. table at http://logocontrol:8088/rest/attributes (on/off status or value)
-	    if device.name == "Q2" then logoControlDeviceNr = 5 end
-	    if device.name == "Q2" then logoControlDeviceAttrNr = 6 end
-      -- if device.name =="Q3" then logoControlDeviceNr = 3 end		-- etc.
-	    -- if device.name =="Q3" then logoControlDeviceAttrNr = 3 end
+	    	if device.name == "Q1" then logoControlDeviceNr = 1 end		-- pair domoticz device with LogoControl device
+	    	if device.name == "Q1" then logoControlDeviceAttrNr = 1 end	-- pair domoticz device with LogoControl device Attribute eg. table at http://logocontrol:8088/rest/attributes (on/off status or value)
+	   	if device.name == "Q2" then logoControlDeviceNr = 5 end
+	    	if device.name == "Q2" then logoControlDeviceAttrNr = 6 end
+      		-- if device.name =="Q3" then logoControlDeviceNr = 3 end	   -- etc.
+	    	-- if device.name =="Q3" then logoControlDeviceAttrNr = 3 end
 
-	    json = (loadfile "/home/pi/domoticz/scripts/lua/JSON.lua")()
-      local file=assert(io.popen('curl http://' .. logoControlIP ..':' .. logoControlport .. '/rest/attributes'))
-      local raw = file:read('*all')
-      file:close()   
-      local logoControlAttributes = json:decode(raw)
-      local logoOutputDevice = logoControlAttributes.attributeUpdates[logoControlDeviceAttrNr].D
-      local logoOutput = logoControlAttributes.attributeUpdates[logoControlDeviceAttrNr].V
-      local logoOutputText = logoControlAttributes.attributeUpdates[logoControlDeviceAttrNr].T
+	    	json = (loadfile "/home/pi/domoticz/scripts/lua/JSON.lua")()
+      		local file=assert(io.popen('curl http://' .. logoControlIP ..':' .. logoControlport .. '/rest/attributes'))
+      		local raw = file:read('*all')
+     		file:close()   
+      		local logoControlAttributes = json:decode(raw)
+     		local logoOutputDevice = logoControlAttributes.attributeUpdates[logoControlDeviceAttrNr].D
+     		local logoOutput = logoControlAttributes.attributeUpdates[logoControlDeviceAttrNr].V
+      		local logoOutputText = logoControlAttributes.attributeUpdates[logoControlDeviceAttrNr].T
       
-      domoticz.log('Checking status -- Device ' .. logoOutputDevice .. ' status  is ' .. logoOutput .. ' (' .. logoOutputText .. ')', domoticz.LOG_INFO)
+      		domoticz.log('Checking status -- Device ' .. logoOutputDevice .. ' status  is ' .. logoOutput .. ' (' .. logoOutputText .. ')', domoticz.LOG_INFO)
         
-        if device.state == 'On' and logoOutput == 0 then
-            domoticz.openURL('http://' .. logoControlIP .. ':' .. logoControlport .. '/rest/devices/' .. logoControlDeviceNr .. '/methods/1')
-		    domoticz.log('Switching on domoticz device ' .. device.name .. ' and LogoControl device ' .. logoControlDeviceNr,domoticz.LOG_INFO)
+        	if device.state == 'On' and logoOutput == 0 then
+            		domoticz.openURL('http://' .. logoControlIP .. ':' .. logoControlport .. '/rest/devices/' .. logoControlDeviceNr .. '/methods/1')
+		    	domoticz.log('Switching on domoticz device ' .. device.name .. ' and LogoControl device ' .. logoControlDeviceNr,domoticz.LOG_INFO)
       
-        elseif device.state == 'Off' and logoOutput == 1 then
-            domoticz.openURL('http://' .. logoControlIP .. ':' .. logoControlport .. '/rest/devices/' .. logoControlDeviceNr .. '/methods/2')
-		    domoticz.log('Switching off domoticz device ' .. device.name .. ' and LogoControl device ' .. logoControlDeviceNr,domoticz.LOG_INFO)
-	    end
-    end
+        	elseif device.state == 'Off' and logoOutput == 1 then
+            		domoticz.openURL('http://' .. logoControlIP .. ':' .. logoControlport .. '/rest/devices/' .. logoControlDeviceNr .. '/methods/2')
+		    	domoticz.log('Switching off domoticz device ' .. device.name .. ' and LogoControl device ' .. logoControlDeviceNr,domoticz.LOG_INFO)
+	    	end
+    	end
 }
